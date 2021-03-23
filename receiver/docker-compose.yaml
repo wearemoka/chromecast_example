@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  nginx:
+    image: "nginx:1.19-alpine"
+    #ports:
+      #- "80:80"
+    volumes:
+      - ./:/usr/share/nginx/html
+
+  ngrok:
+    image: shkoliar/ngrok:latest
+    ports:
+      - 4551:4551
+    links:
+      - nginx
+    environment:
+      - DOMAIN=nginx
+      - PORT=80
+      # - DEBUG=true
